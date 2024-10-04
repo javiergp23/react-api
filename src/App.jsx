@@ -18,11 +18,11 @@ function App() {
         console.log(threefirstWord)
 
 
-        fetch(`https://cataas.com/cat/says/${threefirstWord}?size=50&color=red&json=true`)
-          .then(res => res.json())
+        fetch(`https://cataas.com/cat/says/${threefirstWord}?fontSize=50&fontColor=red`)
           .then(response => {
             const { url } = response
-            setImageUrl(`https://cataas.com${url}`)
+            console.log(response)
+            setImageUrl(`${url}`)
           })
       })
   }, []);
