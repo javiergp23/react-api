@@ -5,6 +5,7 @@ const CAT_ENDPOINT_RAMDOM_FACT = 'https://catfact.ninja/fact';
 
 function App() {
   const [fact, setFact] = useState()
+  const [imageUrl, setImageUrl] = useState()
 
   useEffect(() => {
     fetch(CAT_ENDPOINT_RAMDOM_FACT  )
@@ -13,8 +14,16 @@ function App() {
         const { fact } = data
         setFact(fact)
 
-        const firstWord = fact.split(' ', 3).join(' ')
-        console.log(firstWord)
+        const threefirstWord = fact.split(' ', 3).join(' ')
+        console.log(threefirstWord)
+
+
+        fetch(`https://cataas.com/cat/says/${threefirstWord}?size=50&color=red&json=true`)
+          .then(res => res.json())
+          .then(response => {
+            const { url } = response
+            setImageUrl(`https://cataas.com${url}`)
+          })
       })
   }, []);
 
@@ -22,6 +31,7 @@ function App() {
     <main>
       <h1>App Gatitos</h1>
       {fact && <p>{fact}</p>}
+      {imageUrl && <img src={imageUrl} alt={`Esta imagen proviene de: ${fact}`} />}
     </main>
   )
 }
