@@ -1,11 +1,19 @@
-
+import { useEffect, useState } from "react"
 
 function App() {
+  const [fact, setFact] = useState('lorem ipsum')
+
+  useEffect(() => {
+    fetch('https://catfact.ninja/fact')
+      .then(res => res.json())
+      .then(data => setFact(data.fact))
+  }, [])
 
   return (
-    <>
-        <p>Hola Mundo</p>
-    </>
+    <main>
+      <h1>App Gatitos</h1>
+      <p>{fact}</p>
+    </main>
   )
 }
 
